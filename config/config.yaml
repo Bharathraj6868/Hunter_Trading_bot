@@ -1,0 +1,67 @@
+mt5:
+  path: "C:/Program Files/MetaTrader 5/terminal64.exe"
+  login: 433604702          # replace with env var
+  password: "Hope@0606"
+  server: "Exness-MT5Trial7"
+
+symbols:
+  - "XAUUSD"
+
+timeframes: ["M5", "M15", "H1", "H4"]
+primary_tf: "H1"
+
+risk:
+  risk_per_trade: 0.01       # 1%
+  max_daily_risk: 0.05       # 5%
+  max_drawdown_pct: 0.20     # 20%
+  max_trades_per_day: 5
+  max_consecutive_losses: 3
+  trailing_step_atr_mult: 0.5
+  breakeven_after_atr_mult: 0.75
+  partial_tp_ratio: 0.5
+  partial_tp_atr_mult: 1.0
+  slippage_points: 5
+  max_spread_pips: 3.0
+  dynamic_risk: true
+  kelly_fraction: 0.25
+
+entry:
+  min_rr_ratio: 2.0
+  min_volume_ratio: 1.2
+  confirmation_timeframes: 2
+  use_smc: true
+  use_ict: true
+  use_candle_patterns: true
+  correlation_check: true
+  base_ai_threshold: 65
+
+indicators:
+  ema_fast: 20
+  ema_medium: 50
+  ema_slow: 200
+  rsi_period: 14
+  rsi_ob: 70
+  rsi_os: 30
+  atr_period: 14
+  bb_period: 20
+  bb_stddev: 2.0
+
+news:
+  enabled: false             # set true when API key available
+  avoid_minutes_before: 30
+  avoid_minutes_after: 30
+  importance: ["HIGH", "MEDIUM"]
+  api_key: ""
+
+telegram:
+  enabled: false
+  token: ""
+  chat_id: ""
+
+discord:
+  enabled: false
+  webhook_url: ""
+
+dashboard:
+  host: "0.0.0.0"
+  port: 8050

@@ -1,0 +1,15 @@
+MetaTrader5
+pandas
+numpy
+TA-Lib
+scikit-learn
+joblib
+hmmlearn
+flask
+flask-socketio
+eventlet
+sqlalchemy
+pyyaml
+python-dotenv
+requests
+pytz

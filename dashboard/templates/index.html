@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trading Bot Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; background: #111; color: #eee; }
+        .card { background: #222; padding: 1em; margin: 1em 0; border-radius: 8px; }
+        h1 { color: #0f0; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 0.5em; border-bottom: 1px solid #444; text-align: left; }
+        th { background: #333; }
+    </style>
+</head>
+<body>
+    <h1>📊 Live Trading Bot Dashboard</h1>
+    <div class="card">
+        <strong>Balance:</strong> <span id="balance">0.00</span><br>
+        <strong>Equity:</strong> <span id="equity">0.00</span><br>
+        <strong>Drawdown:</strong> <span id="drawdown">0.00</span>%
+    </div>
+    <div class="card">
+        <h2>Open Positions</h2>
+        <table>
+            <thead>
+                <tr><th>Ticket</th><th>Symbol</th><th>Type</th><th>Volume</th><th>Profit</th></tr>
+            </thead>
+            <tbody id="positions-body"></tbody>
+        </table>
+    </div>
+
+    <script>
+        function fetchData() {
+            fetch('/api/data')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('balance').textContent = data.balance.toFixed(2);
+                    document.getElementById('equity').textContent = data.equity.toFixed(2);
+                    document.getElementById('drawdown').textContent = data.drawdown.toFixed(2);
+                    let html = '';
+                    data.positions.forEach(p => {
+                        html += `<tr>
+                            <td>${p.ticket}</td>
+                            <td>${p.symbol}</td>
+                            <td>${p.type}</td>
+                            <td>${p.volume}</td>
+                            <td style="color:${p.profit >= 0 ? '#0f0' : '#f00'}">${p.profit.toFixed(2)}</td>
+                        </tr>`;
+                    });
+                    if (data.positions.length === 0) html = '<tr><td colspan="5">No open positions</td></tr>';
+                    document.getElementById('positions-body').innerHTML = html;
+                });
+        }
+        setInterval(fetchData, 1000);
+        fetchData();
+    </script>
+</body>
+</html>
