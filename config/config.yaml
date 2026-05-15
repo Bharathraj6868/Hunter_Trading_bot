@@ -1,8 +1,8 @@
 mt5:
-  path: "C:/Program Files/MetaTrader 5/terminal64.exe"
-  login: 433604702          # replace with env var
-  password: "Hope@0606"
-  server: "Exness-MT5Trial7"
+  path: ""
+  login:           # replace with env var
+  password: ""
+  server: ""
 
 symbols:
   - "XAUUSD"
